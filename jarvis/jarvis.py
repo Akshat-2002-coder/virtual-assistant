@@ -84,7 +84,7 @@ while(True):
         break
     elif "weather report" in query:
         import pyowm 
-        owm=pyowm.OWM('6f158ae8fc4c4696451c3dfb923d6a76')
+        owm=pyowm.OWM('API KEY')
         msg=owm.weather_manager()
         location=msg.weather_at_place('mathura')
         weather=location.weather
