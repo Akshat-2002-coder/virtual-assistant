@@ -9,6 +9,7 @@ import random
 import pywhatkit
 import pyautogui
 import shutil
+import pyowm
 
 def get_audio(): 
     r = sr.Recognizer()
@@ -81,6 +82,19 @@ while(True):
     if "exit" in query:
         speak("thank you welcome back again")
         break
+    elif "weather report" in query:
+        import pyowm 
+        owm=pyowm.OWM('6f158ae8fc4c4696451c3dfb923d6a76')
+        msg=owm.weather_manager()
+        location=msg.weather_at_place('mathura')
+        weather=location.weather
+        clouds=weather.detailed_status
+        q1=f"cloud status is {clouds}" 
+        speak(q1)
+        humid=weather.humidity
+        q2=f"humitity status is {humid}" 
+        speak(q2)
+
     elif "open youtube" in query:
         speak("opening youtube")
         webbrowser.open("https:\\youtube.com")
@@ -174,10 +188,14 @@ while(True):
         webbrowser.open("https:\\maps.google.co.in")
     elif "best date" in query:
         speak("5 jan is the best date")
-    elif "wikipedia of" in query:
-        li = query.split("of ")
+    elif "search" in query:
+        li = query.split("search ")
         actor = li[1]
-        speak(wikipedia.summary(actor,sectences = 3))
+        speak("searching")
+        print(actor)
+        res=wikipedia.summary(actor,sentences=3)
+        # print(res)
+        speak(res)
     elif "spell" in query:
         word = query.split("spell ")[1]
         word_list = list(word)

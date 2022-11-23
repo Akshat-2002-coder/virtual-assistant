@@ -1,0 +1,2 @@
+gnizer()
+    with sr.Microphone
